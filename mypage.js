@@ -5,7 +5,6 @@ import HeaderButton from './headerbutton';
 import UnorderedList from './unorderedlist';
 import Header from './header';
 import SideNavBar from './sidenavbar';
-import LeftNavLink from './leftnavlink';
 import MainSection from './mainsection';
 import { browserHistory } from 'react-router';
 import { menuItems } from './menuItems';
@@ -27,16 +26,12 @@ export default class MyPage extends Component {
     browserHistory.push(path);
   }
   _handleMenuItemSelected(itemName) {
-    this.setState({
-      itemName: itemName
-    });
     let sideNavItems = undefined;
     menuItems.forEach((item) => {
       if(itemName === item.name) {
         sideNavItems = item.sideNavItems;
       }
     });
-    console.log("sideNavItems", sideNavItems[0].path);
     browserHistory.push(sideNavItems[0].path);
   }
   _renderMenu() {
@@ -52,13 +47,8 @@ export default class MyPage extends Component {
         sideNavItems = item.sideNavItems;
       }
     });
-    let sidebarItems = sideNavItems.map((item) => {
-      return (<LeftNavLink onClick={this._handleConentLoad.bind(this, item.path)} name={item.name} minimize={minimizeNavigation}/>);
-    });
     let sidebar = (
-      <SideNavBar onToggle={this._toggleNavigationBar} minimize={this.state.minimizeNavigation}>
-        {sidebarItems}
-      </SideNavBar>
+      <SideNavBar onToggle={this._toggleNavigationBar} itemName={itemName} minimize={this.state.minimizeNavigation} items={sideNavItems} handleLoadMenu={this._handleConentLoad}/>
     );
     return sidebar;
   }
@@ -76,9 +66,9 @@ export default class MyPage extends Component {
           </UnorderedList>
       </Header>
       <MainSection>
-        {sidebar}
         {this.props.children}
       </MainSection>
+      {sidebar}
       </div>
     );
   }

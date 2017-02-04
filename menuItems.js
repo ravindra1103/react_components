@@ -13,7 +13,7 @@ export const menuItems = [
       },
       {
         'name': 'Pricing3',
-        'path': '/component1'
+        'path': '/component3'
       },
       {
         'name': 'Pricing4',

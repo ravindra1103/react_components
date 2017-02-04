@@ -27,6 +27,14 @@ export default class Component1 extends Component {
   }
   render () {
     var {transactions} = this.state;
+    var wishList =
+      {
+        1 :  {listName: 'test list1', productsList: [{id: 1, productName: 'iphone6'}]},
+        2 :  {listName: 'test list2', productsList: [{id: 1, productName: 'iphone7'}]}
+      };
+    console.log("wishList1", wishList);
+    let newList = {...wishList, 1 : {listName: 'test list1', productsList: [{id: 1, productName: 'iphone10'}]}};
+    console.log("wishList2", newList);
     var rowItems = [];
     for(var key in transactions) {
       for (var i = 0; i < transactions[key].length; i++) {
@@ -61,7 +69,6 @@ export default class Component1 extends Component {
             <td>Name</td>
             <td>Amount</td>
           </tr>
-          {rowItems}
         </table>
 
       </div>
