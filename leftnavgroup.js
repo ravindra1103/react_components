@@ -4,7 +4,8 @@ export default class LeftNavGroup extends Component {
   constructor(props) {
     super (props);
     this.state = {
-      collapse: false
+      collapse: false,
+      itemSelected: undefined
     };
   }
   _onClickHandler() {
@@ -12,18 +13,27 @@ export default class LeftNavGroup extends Component {
   }
   _onItemSelect(path) {
     this.props.handleLoadMenu(path);
+    this.setState({
+      itemSelected: path
+    });
   }
   render () {
-    let  collapseClass;
+    let  collapseClass, selectedClass;
     if (this.state.collapse) {
       collapseClass = "sub-group expand-menu";
     }else {
       collapseClass = "sub-group";
     }
+
     let linkItems = this.props.items.map((item) => {
+      if (this.state.itemSelected && (item.path === this.state.itemSelected)) {
+        selectedClass = "sub-group-link child-selected";
+      }else {
+        selectedClass = "sub-group-link";
+      }
       return (
           <li>
-              <a className="sub-group-link" onClick={this._onItemSelect.bind(this, item.path)}>{item.name}</a>
+              <a className={selectedClass} onClick={this._onItemSelect.bind(this, item.path)}>{item.name}</a>
           </li>
       );
     });

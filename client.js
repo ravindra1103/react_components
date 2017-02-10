@@ -7,6 +7,8 @@ import Component2 from './component2';
 import Component3 from './component3';
 import Component4 from './component4';
 import Component5 from './component5';
+import Component6 from './component6';
+import Component7 from './component7';
 
 import Login from './Login';
 import { Route, browserHistory, Router } from 'react-router';
@@ -20,6 +22,8 @@ ReactDOM.render(
       <Route path="/component3" component={Component3}/>
       <Route path="/component4" component={Component4}/>
       <Route path="/component5" component={Component5}/>
+      <Route path="/component6" component={Component6}/>
+      <Route path="/component7" component={Component7}/>
     </Route>
     <Route path="/login" component={Login}/>
   </Router>

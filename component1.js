@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import _ from 'lodash';
 
 export default class Component1 extends Component {
   constructor(props) {
@@ -26,6 +27,46 @@ export default class Component1 extends Component {
     };
   }
   render () {
+    let requests = [
+       {
+          "requestId":546,
+          "requestStatus":{
+             "requestStatusId":1,
+             "title":"Scheduled",
+             "description":"Scheduled"
+          }
+       },
+       {
+          "requestId":545,
+          "requestStatus":{
+             "requestStatusId":2,
+             "title":"Scheduled",
+             "description":"Scheduled"
+          }
+       },
+       {
+          "requestId":170,
+          "requestStatus":{
+             "requestStatusId":3,
+             "title":"Scheduled",
+             "description":"Scheduled"
+          }
+       }
+    ];
+    var id1 = 2;
+    var id2 = 3;
+    var ids = [2,3];
+    let newValues = _.filter(requests, ['requestStatus.requestStatusId',  2]);
+    console.log("newValues", newValues);
+    let newValues2 = _.filter(requests,
+        function(request) {
+          var requestsFound = _.filter(ids,
+            function(o) {
+              return o === request.requestStatus.requestStatusId;
+            });
+          return (requestsFound.length > 0);
+        });
+    console.log("newValues3", newValues2);
     var {transactions} = this.state;
     var wishList =
       {
